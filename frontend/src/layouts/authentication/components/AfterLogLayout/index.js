@@ -21,62 +21,62 @@ import Grid from "@mui/material/Grid";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
-// import MDTypography from "components/MDTypography";
 
 // Material Dashboard 2 React example components
 import DefaultNavbar from "examples/Navbars/DefaultNavbar";
 import PageLayout from "examples/LayoutContainers/PageLayout";
 
-// Authentication layout components
+// Authentication pages components
 import Footer from "layouts/authentication/components/Footer";
 import AgentTopNav from "examples/Navbars/AgentTopNav";
+import ResponsiveAppBar from "examples/Navbars/ResponsiveAppBar";
 
-function CoverLayout({ coverHeight, image, children }) {
+function AfterLogLayout({ image, children }) {
   return (
     <PageLayout>
-      <AgentTopNav/>
+      {/* <DefaultNavbar
+        action={{
+          type: "external",
+          route: "/",
+          //label: "free download",
+          color: "dark",
+        }}
+      /> */}
+      {/* <AgentTopNav/> */}
+      <ResponsiveAppBar/>
       <MDBox
-        width="calc(100% - 2rem)"
-        minHeight={coverHeight}
-        borderRadius="xl"
-        mx={2}
-        my={2}
-        pt={6}
-        pb={28}
+        position="absolute"
+        width="100%"
+        minHeight="100vh"
         sx={{
           backgroundImage: ({ functions: { linearGradient, rgba }, palette: { gradients } }) =>
             image &&
             `${linearGradient(
-              rgba(gradients.dark.main, 0.4),
-              rgba(gradients.dark.state, 0.4)
+              rgba(gradients.dark.main, 0.6),
+              rgba(gradients.dark.state, 0.6)
             )}, url(${image})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       />
-      <MDBox mt={{ xs: -20, lg: -18 }} px={1} width="calc(100% - 2rem)" mx="auto">
-        <Grid container spacing={1} justifyContent="center">
+      <MDBox px={1} width="100%" height="100vh" mx="auto">
+        {/* <Grid container spacing={1} justifyContent="center" alignItems="center" height="100%">
           <Grid item xs={11} sm={9} md={5} lg={4} xl={3}>
             {children}
           </Grid>
-        </Grid>
+        </Grid> */}
+        {children}
       </MDBox>
-      <Footer />
+      <Footer light />
     </PageLayout>
   );
 }
 
-// Setting default props for the CoverLayout
-CoverLayout.defaultProps = {
-  coverHeight: "35vh",
-};
-
-// Typechecking props for the CoverLayout
-CoverLayout.propTypes = {
-  coverHeight: PropTypes.string,
+// Typechecking props for the BasicLayout
+AfterLogLayout.propTypes = {
   image: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
 };
 
-export default CoverLayout;
+export default AfterLogLayout ;

@@ -57,7 +57,7 @@ import PackageCard from "./PackageCard";
 
 function PacakageSearchResults() {
   const [backendData, setBackendData] = useState([{}])
-  const [filteredData, setFilteredData] = useState([{}]);
+  const [filteredData, setFilteredData] = useState([]);
   const [startPoint, setStartPoint] = useState()
   const [destination, setDestination] = useState()
   const [tripDuration, setTripDuration] = useState()
@@ -65,6 +65,10 @@ function PacakageSearchResults() {
   const [specialty, setSpecialty] = useState()
 
   const [searchResults, setSearchResults] = useState()
+
+  // useEffect(() => {
+  //   console.log(filteredData)
+  // });
 
   const filterCriteria = {
     price: null,
@@ -104,7 +108,7 @@ function PacakageSearchResults() {
     // alert(travellers)
     // alert(specialty)
     //var query = { destination: "barcelona" };
-
+    
     const results = await fetch(`/packages/search/${destination}/${travellers}/${specialty}`
     ).then(
       response => response.json()
@@ -288,35 +292,39 @@ function PacakageSearchResults() {
               <MDBox pt={1} pb={2} px={2}>
                 <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
                   {
-      //             (filteredData.data== null)
-      // ? (<></>)
-      // : 
-      // (
-                    filteredData.map((item, i) =>
-                    (
-                      <PackageCard
-                        key={i}
-                        packageName={item.packageName}
-                      destination={item.destination}
-                      specialty={item.specialty}
-                  duration={item.duration}
-                  numTravelers={item.numTravelers}
-                  departure_destination={item.departure_destination}
-                  departure_time={item.departure_time}
-                  arrival_destination={item.arrival_destination}
-                  arrival_time={item.arrival_time}
-                  airline={item.airline}
-                  flight_duration={item.flight_duration}
-                  transit_state={item.transit_state}
-                  hotel_name={item.hotel_name}
-                  rating={item.rating}
-                  hotel_address={item.hotel_address}
-                  facilities={item.facilities}
-                  saving_price={item.saving_price}
-                  final_price={item.final_price}
-                    />
-                  ))
-      // )
+                  (filteredData != null && filteredData.length>0)
+      ? (
+        filteredData.map((item, i) =>
+        (
+          <PackageCard
+            key={i}
+            packageName={item.packageName}
+          destination={item.destination}
+          specialty={item.specialty}
+      duration={item.duration}
+      numTravelers={item.numTravelers}
+      departure_destination={item.departure_destination}
+      departure_time={item.departure_time}
+      arrival_destination={item.arrival_destination}
+      arrival_time={item.arrival_time}
+      airline={item.airline}
+      flight_duration={item.flight_duration}
+      transit_state={item.transit_state}
+      hotel_name={item.hotel_name}
+      rating={item.rating}
+      hotel_address={item.hotel_address}
+      facilities={item.facilities}
+      saving_price={item.saving_price}
+      final_price={item.final_price}
+      packageId={item._id}
+        />
+      ))
+      
+      )
+      : 
+      (
+           <></>      
+      )
                 }
                 </MDBox>
               </MDBox>

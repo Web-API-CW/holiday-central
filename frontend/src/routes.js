@@ -48,6 +48,7 @@ import SignUp from "layouts/authentication/sign-up";
 // @mui icons
 import Icon from "@mui/material/Icon";
 import TravelPacakages from "layouts/travel-packages";
+import Cart from "layouts/cart";
 
 const routes = [
   {
@@ -121,6 +122,14 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/travel-packages",
     component: <TravelPacakages />,
+  },
+  {
+    type: "collapse",
+    name: "cart",
+    key: "cart",
+    icon: <Icon fontSize="small">table_view</Icon>,
+    route: "/cart/:id",
+    component: <Cart />,
   },
 ];
 

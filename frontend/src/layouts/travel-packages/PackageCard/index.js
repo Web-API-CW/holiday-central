@@ -31,7 +31,7 @@ import { Card, Grid, Rating } from "@mui/material";
 function PackageCard(props) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
-
+alert(props.packageId)
   return (
     <MDBox
       component="li"
@@ -200,18 +200,12 @@ function PackageCard(props) {
                         (per person Flight+Hotel)
                       </MDTypography>
                     </MDBox>
-
                   </MDBox>
-
                 </MDBox>
-
-
                 <MDBox pt={2} pl={3}>
-                  <MDButton size="medium" style={{ backgroundColor: "purple", color: "white" }}>Book Now</MDButton>
+                  <MDButton href={`/cart/${props.packageId}`} size="medium" style={{ backgroundColor: "purple", color: "white" }}>Book Now</MDButton>
                 </MDBox>
-
               </MDBox>
-
             </Grid>
           </Grid>
         </MDBox>
@@ -240,7 +234,8 @@ PackageCard.propTypes = {
   hotel_address: PropTypes.string.isRequired,
   facilities: PropTypes.string.isRequired,
   saving_price: PropTypes.string.isRequired,
-  final_price: PropTypes.number.isRequired
+  final_price: PropTypes.number.isRequired,
+  packageId:PropTypes.objectOf(PropTypes.number)
 };
 
 export default PackageCard;

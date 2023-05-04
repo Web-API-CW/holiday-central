@@ -55,7 +55,7 @@ import Select from 'react-select';
 
 import PackageCard from "./PackageCard";
 
-function PacakageSearchResults() {
+function TravelPackages() {
   const [backendData, setBackendData] = useState([{}])
   const [filteredData, setFilteredData] = useState([]);
   const [startPoint, setStartPoint] = useState()
@@ -109,7 +109,7 @@ function PacakageSearchResults() {
     // alert(specialty)
     //var query = { destination: "barcelona" };
     
-    const results = await fetch(`/packages/search/${destination}/${travellers}/${specialty}`
+    const results = await fetch(`/packages/search/${destination}/${travellers}/${tripDuration}/${specialty}`
     ).then(
       response => response.json()
     ).then(
@@ -122,6 +122,14 @@ function PacakageSearchResults() {
       }
     )
 
+  }
+
+  const sortPriceData=(e, field)=>{
+    let tempObj = [...JSON.parse(JSON.stringify(backendData.data))];
+      console.log(tempObj);
+    tempObj = tempObj.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0))
+    //re render component
+    setFilteredData(tempObj);
   }
 
   const filterData = (e, field) => {
@@ -154,7 +162,6 @@ function PacakageSearchResults() {
           return true;
         });
 
-        // tempObj = tempObj.sort((a,b) => (a.price > b.price) ? 1 : ((b.price > a.price) ? -1 : 0))
       }
 
       //re render component
@@ -243,7 +250,7 @@ function PacakageSearchResults() {
                     isSearchable={true}
                     name="color"
                     options={price}
-                    onChange={(e) => filterData(e, "price")}
+                    onChange={(e) => sortPriceData(e, "price")}
                   />
                 </MDBox>
               </Grid>
@@ -336,4 +343,4 @@ function PacakageSearchResults() {
   );
 }
 
-export default PacakageSearchResults;
+export default TravelPackages;

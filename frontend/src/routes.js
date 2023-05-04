@@ -47,6 +47,7 @@ import SignUp from "layouts/authentication/sign-up";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import TravelPacakages from "layouts/travel-packages";
 
 const routes = [
   {
@@ -112,6 +113,14 @@ const routes = [
     icon: <Icon fontSize="small">assignment</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
+  },
+  {
+    type: "collapse",
+    name: "Travel Packages",
+    key: "travel-packages",
+    icon: <Icon fontSize="small">assignment</Icon>,
+    route: "/travel-packages",
+    component: <TravelPacakages />,
   },
 ];
 
